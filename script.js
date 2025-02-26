@@ -102,11 +102,23 @@ async function fetchAndParseExcel() {
 
         // Format date werid formatting issue because its excel date
         let dueDate = '';
+        let parsedDate = null;
         if (po.due_date && !isNaN(po.due_date)) {
             const excelBaseDate = new Date(1899, 11, 30); // Excel starts from Dec 30, 1899
-            const parsedDate = new Date(excelBaseDate.getTime() + po.due_date * 86400000); // Convert days to milliseconds
+            parsedDate = new Date(excelBaseDate.getTime() + po.due_date * 86400000); // Convert days to milliseconds
             dueDate = parsedDate.toLocaleDateString("en-US");
         }
+
+        let dueDateObj = null;
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        if (parsedDate && parsedDate < today) {
+          row.style.backgroundColor = "red";
+          row.style.color = "white";
+        } else if (parsedDate.toDateString() == today.toDateString()) {
+          row.style.backgroundColor = 'yellow';
+        };
 
         // Remove trailing "x" and extra "x" separators
         dimensions = dimensions.replace(/x+/g, 'x').replace(/x$/, '');
