@@ -1,0 +1,81 @@
+/* Container for the scrolling table */
+.scroll-container {
+    height: 600px; /* Increase height to show more rows */
+    overflow: hidden; /* Hide overflow */
+    position: relative;
+    border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+  }
+  /* Table wrapper for scrolling */
+  .table-wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    animation: scroll 20s linear infinite; /* Adjust animation duration as needed */
+  }
+  
+  /* Keyframes for scrolling */
+  @keyframes scroll {
+    0% {
+      top: 0; /* Start at the top */
+    }
+    50% {
+      top: -100%; /* Scroll to the bottom */
+    }
+    100% {
+      top: 0; /* Scroll back to the top */
+    }
+  }
+  
+  /* Optional: Pause animation on hover */
+  .scroll-container:hover .table-wrapper {
+    animation-play-state: paused;
+  }
+  
+  /* Existing styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1400px; /* Increase max-width for a larger table */
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem; /* Increase font size for the title */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.2rem; /* Increase font size for better readability */
+  }
+  
+  table th, table td {
+    padding: 15px; /* Increase padding for more spacing */
+    text-align: left;
+    border-bottom: 2px solid #ddd; /* Thicker border for better visibility */
+  }
+  
+  table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    font-size: 1.3rem; /* Increase font size for headers */
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Optional: Add alternating row colors */
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
