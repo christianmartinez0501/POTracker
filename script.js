@@ -77,7 +77,7 @@ async function fetchAndParseExcel() {
   // Function to render the grouped table
   function renderGroupedTable(groupedData) {
     poTableBody.innerHTML = ""; // Clear existing rows
-  
+    
     // Loop through each PO number group
     Object.keys(groupedData).forEach((poNumber) => {
       const group = groupedData[poNumber];
@@ -85,24 +85,39 @@ async function fetchAndParseExcel() {
       // Add a header row for the PO number
       const headerRow = document.createElement("tr");
       headerRow.innerHTML = `
-        <td colspan="5" style="background-color: #f1f1f1; font-weight: bold;">PO Number: ${poNumber}</td>
+        <td colspan="7" style="background-color: #f1f1f1; font-weight: bold;">PO Number: ${poNumber}</td>
       `;
       poTableBody.appendChild(headerRow);
-  
+      
       // Add rows for each item in the group
       group.forEach((po) => {
+
         const row = document.createElement("tr");
+
         // Format Shape, Dim1, Dim2, and Dim3 as "W 21x44"
         let dimensions = `${po.shape} ${po.dim1 || ''}x${po.dim2 || ''}x${po.dim3 || ''}`;
+
+        // Format length
         const length = `${po.length_feet || 0}'-${po.length_inches || 0}"`;
+
+        // Format date werid formatting issue because its excel date
+        let dueDate = '';
+        if (po.due_date && !isNaN(po.due_date)) {
+            const excelBaseDate = new Date(1899, 11, 30); // Excel starts from Dec 30, 1899
+            const parsedDate = new Date(excelBaseDate.getTime() + po.due_date * 86400000); // Convert days to milliseconds
+            dueDate = parsedDate.toLocaleDateString("en-US");
+        }
+
         // Remove trailing "x" and extra "x" separators
         dimensions = dimensions.replace(/x+/g, 'x').replace(/x$/, '');
         row.innerHTML = `
           <td>${po.po_number}</td>
+          <td>${po.jobno}</td>
           <td>${po.qty_open}</td>
           <td>${dimensions}</td>
           <td>${length}</td>
           <td>${po.name}</td>
+          <td>${dueDate}</td>
         `;
         poTableBody.appendChild(row);
       });
