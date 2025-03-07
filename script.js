@@ -103,13 +103,13 @@ async function fetchAndParseExcel() {
         // Format date werid formatting issue because its excel date
         let dueDate = '';
         let parsedDate = null;
+
         if (po.due_date && !isNaN(po.due_date)) {
             const excelBaseDate = new Date(1899, 11, 30); // Excel starts from Dec 30, 1899
             parsedDate = new Date(excelBaseDate.getTime() + po.due_date * 86400000); // Convert days to milliseconds
             dueDate = parsedDate.toLocaleDateString("en-US");
         }
 
-        let dueDateObj = null;
         const today = new Date();
         today.setHours(0,0,0,0);
 
