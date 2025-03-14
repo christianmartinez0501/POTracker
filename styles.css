@@ -10,19 +10,16 @@
   position: absolute;
   top: 0;
   width: 100%;
-  animation: scroll 20s linear infinite; /* Adjust animation duration as needed */
+  animation: scroll 50s linear infinite; /* Adjust animation duration as needed */
 }
   
 /* Keyframes for scrolling */
 @keyframes scroll {
   0% {
-    top: 0; 
-  }
-  50% {
-    top: -100%; 
+    transform: translateY(0); 
   }
   100% {
-    top: 0; 
+    transform: translateY(-100%); /* Scrolls up by the height of the container */
   }
 }
   
