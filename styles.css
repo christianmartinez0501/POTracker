@@ -1,10 +1,4 @@
-/* Container for the scrolling table */
-.scroll-container {
-  height: 600px; /* Increase height to show more rows */
-  overflow: hidden; /* Hide overflow */
-  position: relative;
-  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
-}
+
 /* Table wrapper for scrolling */
 .table-wrapper {
   position: absolute;
@@ -43,7 +37,21 @@ body {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-  
+
+.table-container {
+  display: flex;
+  gap: 20px;
+}
+
+/* Container for the scrolling table */
+.scroll-container {
+  flex: 1;
+  height: 600px; /* Increase height to show more rows */
+  overflow-y: auto; /* Hide overflow */
+  position: relative;
+  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+}
+
 h1 {
   text-align: center;
   color: #333;
